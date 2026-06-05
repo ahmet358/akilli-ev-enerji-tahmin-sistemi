@@ -16,7 +16,7 @@ class Settings:
 
     app_name: str = os.getenv("APP_NAME", "Akıllı Ev Enerji Tüketimi Tahmin Sistemi")
     debug: bool = os.getenv("DEBUG", "false").lower() in {"1", "true", "yes", "evet"}
-    database_url: str = os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'smart_home_energy.db'}")
+    database_url: str = os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'runtime' / 'data' / 'smart_home_energy.db'}")
     model_path: Path = Path(os.getenv("MODEL_PATH", BASE_DIR / "saved_models" / "best_model.joblib"))
     preprocessor_path: Path = Path(
         os.getenv("PREPROCESSOR_PATH", BASE_DIR / "saved_models" / "preprocessor.joblib")

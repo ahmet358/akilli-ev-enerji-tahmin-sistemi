@@ -10,11 +10,10 @@ services:
       - key: DEBUG
         value: false
       - key: DATABASE_URL
-        value: sqlite:///./smart_home_energy.db
+        value: sqlite:///./runtime/data/smart_home_energy.db
       - key: MODEL_PATH
         value: ./saved_models/best_model.joblib
       - key: PREPROCESSOR_PATH
         value: ./saved_models/preprocessor.joblib
       - key: DATASET_PATH
         value: ./data/energy_consumption.csv
-

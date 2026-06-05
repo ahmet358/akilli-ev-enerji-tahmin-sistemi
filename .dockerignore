@@ -5,6 +5,6 @@ __pycache__
 *.pyc
 *.db
 *.sqlite
+runtime
 .git
 .pytest_cache
-
