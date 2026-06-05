@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Akıllı Ev Enerji Tüketimi Tahmin Sistemi{% endblock %}
+
+{% block content %}
+<section class="hero-section website-hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <div class="col-xl-8 col-lg-9">
+            <span class="hero-kicker"><i class="bi bi-cpu me-2"></i>Makine öğrenmesi destekli akıllı ev platformu</span>
+            <h1>Akıllı ev enerji tüketimini ölçülebilir, anlaşılır ve tahmin edilebilir hale getirin.</h1>
+            <p class="hero-copy">
+                Kullanıcı girdilerini doğrulayan, tahminleri veritabanına kaydeden, model performansını karşılaştıran
+                ve deployment için hazır gelen profesyonel bir enerji tahmin web sitesi.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+                <a href="/prediction" class="btn btn-primary btn-lg"><i class="bi bi-lightning-charge-fill me-2"></i>Hemen Tahmin Yap</a>
+                <a href="/dashboard" class="btn btn-outline-light btn-lg"><i class="bi bi-speedometer2 me-2"></i>Dashboard'u Gör</a>
+            </div>
+        </div>
+    </div>
+    <div class="container hero-metrics">
+        <div class="hero-metric">
+            <strong>5</strong>
+            <span>Regresyon modeli karşılaştırılır</span>
+        </div>
+        <div class="hero-metric">
+            <strong>4</strong>
+            <span>Temel performans metriği izlenir</span>
+        </div>
+        <div class="hero-metric">
+            <strong>3</strong>
+            <span>Veritabanı tablosu ile kayıt tutulur</span>
+        </div>
+    </div>
+</section>
+
+<section class="site-section">
+    <div class="container">
+        <div class="section-heading">
+            <span>Platform Özeti</span>
+            <h2>Web sitesi, makine öğrenmesi ve veri kaydı tek akışta birleşir.</h2>
+            <p>Bu yapı yalnızca bir tahmin formu değildir; kullanıcı, model, rapor ve deployment katmanlarını birlikte taşıyan tamamlanmış bir üründür.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <i class="bi bi-input-cursor-text"></i>
+                    <h3>Kontrollü Veri Girişi</h3>
+                    <p>Form alanları makul sınırlarla doğrulanır; hatalı girişlerde kullanıcıya açık ve nazik geri bildirim verilir.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <i class="bi bi-diagram-3"></i>
+                    <h3>Karşılaştırmalı Modelleme</h3>
+                    <p>Birden fazla regresyon modeli eğitilir, MAE, MSE, RMSE ve R2 Score değerleriyle karşılaştırılır.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card h-100">
+                    <i class="bi bi-speedometer2"></i>
+                    <h3>Canlı Dashboard</h3>
+                    <p>Kullanıcılar, tahminler, son işlemler ve model durumu tek ekranda anlaşılır grafiklerle izlenir.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="site-section section-quiet">
+    <div class="container">
+        <div class="section-heading">
+            <span>Nasıl Çalışır?</span>
+            <h2>Dört adımda tahmin edilebilir enerji yönetimi</h2>
+        </div>
+        <div class="process-grid">
+            <div class="process-step">
+                <b>01</b>
+                <h3>Kullanıcı oluşturulur</h3>
+                <p>Ad soyad ve e-posta ile sade, gizlilik dostu bir kullanıcı profili hazırlanır.</p>
+            </div>
+            <div class="process-step">
+                <b>02</b>
+                <h3>Ev koşulları girilir</h3>
+                <p>Sıcaklık, nem, cihaz sayısı, saat, hane büyüklüğü ve hava durumu bilgileri alınır.</p>
+            </div>
+            <div class="process-step">
+                <b>03</b>
+                <h3>Model tahmin üretir</h3>
+                <p>Kaydedilmiş preprocessing pipeline veriyi hazırlar ve aktif üretim modeli kWh tahminini hesaplar.</p>
+            </div>
+            <div class="process-step">
+                <b>04</b>
+                <h3>Sonuçlar izlenir</h3>
+                <p>Tahmin, model adı ve kullanıcı işlemleri dashboard üzerinde raporlanır.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="site-section">
+    <div class="container">
+        <div class="website-strip">
+            <div>
+                <span class="strip-kicker">Deployment hazır</span>
+                <h2>Yerelden canlı yayına taşınabilecek temiz mimari</h2>
+                <p>FastAPI backend, SQLite yapılandırması, Dockerfile, Render Blueprint ve Türkçe README ile proje online deployment için hazırlanmıştır.</p>
+            </div>
+            <div class="strip-actions">
+                <a href="/model-performance" class="btn btn-primary"><i class="bi bi-bar-chart-line me-2"></i>Model Performansı</a>
+                <a href="/about" class="btn btn-outline-secondary"><i class="bi bi-info-circle me-2"></i>Proje Hakkında</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

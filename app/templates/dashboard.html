@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | Akıllı Enerji{% endblock %}
+
+{% block content %}
+<section class="page-band">
+    <div class="container">
+        <div class="page-heading">
+            <span><i class="bi bi-speedometer2 me-2"></i>Operasyon paneli</span>
+            <h1>Enerji tahminlerinin genel görünümü</h1>
+            <p>Kullanıcı etkinliği, son tahminler ve model çıktıları tek ekranda izlenir.</p>
+        </div>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="row g-4 mb-4">
+        <div class="col-md-6 col-xl-3"><div class="stat-card"><span>Toplam Kullanıcı</span><strong>{{ stats.total_users }}</strong><i class="bi bi-people"></i></div></div>
+        <div class="col-md-6 col-xl-3"><div class="stat-card"><span>Toplam Tahmin</span><strong>{{ stats.total_predictions }}</strong><i class="bi bi-lightning"></i></div></div>
+        <div class="col-md-6 col-xl-3"><div class="stat-card"><span>Ortalama Tahmin</span><strong>{{ stats.average_prediction }} kWh</strong><i class="bi bi-graph-up"></i></div></div>
+        <div class="col-md-6 col-xl-3"><div class="stat-card"><span>Aktif Model</span><strong class="small-stat">{{ active_model }}</strong><i class="bi bi-cpu"></i></div></div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="content-card h-100">
+                <h2>Son tahminlerin enerji tüketimi grafiği</h2>
+                <div id="predictionChart" class="chart-box"></div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="content-card h-100">
+                <h2>Model performans karşılaştırması</h2>
+                <div id="modelChart" class="chart-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mt-1">
+        <div class="col-lg-7">
+            <div class="content-card">
+                <h2>Son tahminler</h2>
+                {% if recent_predictions %}
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead><tr><th>Kullanıcı</th><th>Tüketim</th><th>Model</th><th>Tarih</th></tr></thead>
+                            <tbody>
+                            {% for item in recent_predictions %}
+                                <tr>
+                                    <td>{{ item.user.full_name }}</td>
+                                    <td>{{ "%.2f"|format(item.predicted_energy_consumption) }} kWh</td>
+                                    <td>{{ item.model_used }}</td>
+                                    <td>{{ item.created_at.strftime('%d.%m.%Y %H:%M') }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="empty-state"><i class="bi bi-clipboard-data"></i><p>Henüz tahmin kaydı yok.</p></div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="content-card">
+                <h2>Son kullanıcı işlemleri</h2>
+                {% if recent_actions %}
+                    <div class="timeline">
+                        {% for action in recent_actions %}
+                            <div class="timeline-item">
+                                <strong>{{ action.action_type }}</strong>
+                                <span>{{ action.action_description }}</span>
+                                <small>{{ action.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state"><i class="bi bi-clock-history"></i><p>Henüz işlem kaydı yok.</p></div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="content-card mt-4">
+        <h2>Aylara göre tahmin dağılımı</h2>
+        {% if monthly_distribution %}
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead><tr><th>Ay</th><th>Tahmin Sayısı</th><th>Ortalama Tüketim</th></tr></thead>
+                    <tbody>
+                    {% for row in monthly_distribution %}
+                        <tr><td>{{ row.month }}</td><td>{{ row.count }}</td><td>{{ row.average }} kWh</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-muted mb-0">Aylık dağılım için henüz yeterli tahmin kaydı oluşmadı.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    window.akilliEnerjiGrafikleri = {
+        tahminler: {{ prediction_chart_json | safe }},
+        modeller: {{ model_chart_json | safe }}
+    };
+    window.akilliEnerjiDashboardHazirla();
+</script>
+{% endblock %}
+

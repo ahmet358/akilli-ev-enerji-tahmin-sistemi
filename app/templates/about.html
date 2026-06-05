@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Proje Hakkında | Akıllı Enerji{% endblock %}
+
+{% block content %}
+<section class="page-band">
+    <div class="container">
+        <div class="page-heading">
+            <span><i class="bi bi-info-circle me-2"></i>Proje hakkında</span>
+            <h1>Uçtan uca makine öğrenmesi tabanlı enerji tahmin ürünü</h1>
+            <p>Bu uygulama, veri hazırlamadan model seçimine, web arayüzünden deployment hazırlığına kadar bütün temel üretim katmanlarını içerir.</p>
+        </div>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="content-card h-100">
+                <h2>Mimari yaklaşım</h2>
+                <p>
+                    FastAPI route katmanı, SQLAlchemy veritabanı modelleri ve scikit-learn eğitim pipeline'ı birbirinden ayrılmıştır.
+                    Böylece arayüz, veri kayıtları ve model dosyaları bağımsız biçimde geliştirilebilir.
+                </p>
+                <ul class="check-list">
+                    <li>SQLite ile sade ve taşınabilir yerel veritabanı</li>
+                    <li>joblib ile kaydedilen model ve preprocessing pipeline</li>
+                    <li>Jinja2 ile sunucu tarafında oluşturulan responsive sayfalar</li>
+                    <li>Docker ve Render yapılandırmasıyla deployment hazırlığı</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="content-card h-100">
+                <h2>Gizlilik ve kullanım sınırları</h2>
+                <p>
+                    Sistem parola veya hassas kimlik bilgisi saklamaz. Kullanıcı profili yalnızca tahmin geçmişini
+                    ilişkilendirmek ve dashboard üzerinde anlamlı işlem kayıtları göstermek için kullanılır.
+                </p>
+                <p>
+                    Tahmin çıktıları karar destek niteliğindedir. Gerçek tüketim; sayaç doğruluğu, cihaz verimliliği,
+                    bina izolasyonu ve kullanım alışkanlıklarına göre değişebilir.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

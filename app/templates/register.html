@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Kullanıcı | Akıllı Enerji{% endblock %}
+
+{% block content %}
+<section class="page-band">
+    <div class="container">
+        <div class="page-heading">
+            <span><i class="bi bi-person-badge me-2"></i>Kullanıcı profili</span>
+            <h1>Kısa ve gizlilik dostu kullanıcı kaydı</h1>
+            <p>Bu sistem parola saklamaz ve tam bir kimlik doğrulama sistemi gibi davranmaz. Kullanıcı bilgisi yalnızca tahmin geçmişini düzenlemek için tutulur.</p>
+        </div>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="row g-4">
+        <div class="col-lg-5">
+            <div class="content-card">
+                <h2>Yeni kullanıcı oluştur</h2>
+                {% if error %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endif %}
+                <form method="post" action="/users/register" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="full_name" class="form-label">Ad Soyad</label>
+                        <input id="full_name" name="full_name" type="text" class="form-control" minlength="2" maxlength="120" required placeholder="Örn. Deniz Yılmaz">
+                        <div class="invalid-feedback">Lütfen geçerli bir ad soyad girin.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-posta</label>
+                        <input id="email" name="email" type="email" class="form-control" required placeholder="ornek@alanadi.com">
+                        <div class="invalid-feedback">Lütfen geçerli bir e-posta adresi girin.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-arrow-right-circle me-2"></i>Devam Et</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="content-card">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="mb-0">Kayıtlı kullanıcılar</h2>
+                    <span class="badge text-bg-light border">{{ users|length }} kullanıcı</span>
+                </div>
+                {% if users %}
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead>
+                            <tr>
+                                <th>Ad Soyad</th>
+                                <th>E-posta</th>
+                                <th>Kayıt Tarihi</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>{{ user.full_name }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.created_at.strftime('%d.%m.%Y %H:%M') }}</td>
+                                    <td class="text-end"><a class="btn btn-sm btn-outline-primary" href="/prediction?user_id={{ user.id }}">Tahmin Yap</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <i class="bi bi-people"></i>
+                        <p>Henüz kullanıcı oluşturulmadı. İlk kullanıcıyı ekleyerek tahmin akışına başlayabilirsiniz.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

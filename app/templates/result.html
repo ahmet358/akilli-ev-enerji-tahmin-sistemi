@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Tahmin Sonucu | Akıllı Enerji{% endblock %}
+
+{% block content %}
+<section class="result-hero">
+    <div class="container">
+        <div class="result-card">
+            <span class="result-label">Tahmini enerji tüketimi</span>
+            <h1>{{ "%.2f"|format(record.predicted_energy_consumption) }} kWh</h1>
+            <p>Bu değer, girilen ev koşulları altında beklenen enerji tüketimini temsil eder. Sonuç kesin sayaç verisi değildir; karar destek amacıyla kullanılmalıdır.</p>
+            <div class="d-flex flex-wrap gap-2 justify-content-center">
+                <span class="badge text-bg-light border">Model: {{ record.model_used }}</span>
+                <span class="badge text-bg-light border">Kayıt: {{ record.created_at.strftime('%d.%m.%Y %H:%M') }}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="content-card h-100">
+                <h2>Sonucu nasıl okumalı?</h2>
+                <p>
+                    Tahmin, seçilen modelin geçmiş veri örüntülerinden öğrendiği ilişkilere dayanır. Aktif cihaz sayısı,
+                    ısıtma ve soğutma kullanımı arttıkça beklenen tüketim de genellikle yükselir.
+                </p>
+                <div class="input-summary">
+                    <span>Sıcaklık: {{ record.temperature }} °C</span>
+                    <span>Nem: {{ record.humidity }}%</span>
+                    <span>Aktif cihaz: {{ record.active_appliances }}</span>
+                    <span>Aydınlatma: {{ record.lights_usage }}</span>
+                    <span>Hane: {{ record.household_size }} kişi</span>
+                    <span>Hava: {{ record.weather_condition }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="content-card h-100">
+                <h2>Tüketimi azaltma önerileri</h2>
+                <ul class="suggestion-list">
+                    <li>Yoğun saatlerde gereksiz cihazları bekleme modunda bırakmayın.</li>
+                    <li>Isıtma ve soğutma sistemlerinde hedef sıcaklığı küçük adımlarla ayarlayın.</li>
+                    <li>Aydınlatmada doğal ışığı ve düşük tüketimli ampulleri tercih edin.</li>
+                    <li>Yüksek tüketimli cihazları mümkünse aynı anda çalıştırmayın.</li>
+                </ul>
+                <div class="d-grid gap-2 mt-4">
+                    <a href="/prediction?user_id={{ record.user_id }}" class="btn btn-primary"><i class="bi bi-arrow-repeat me-2"></i>Yeni Tahmin Yap</a>
+                    <a href="/dashboard" class="btn btn-outline-secondary"><i class="bi bi-speedometer2 me-2"></i>Dashboard'a Git</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
